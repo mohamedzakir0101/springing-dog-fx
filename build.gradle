@@ -1,0 +1,58 @@
+plugins {
+    id 'application'
+    id 'org.openjfx.javafxplugin'version '0.0.8'
+    id 'org.beryx.jlink'  version '2.21.0'
+}
+
+group 'sons.mamoun.projects'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+
+//sourceSets {
+//    main {
+//        resources {
+//            srcDirs = ["src/main/resources"]
+//            includes = ["**/*.fxml" , "**/*.png"]
+//        }
+//    }
+//}
+
+javafx {
+    version = 13
+//    sdk = '/home/mohamedzakir/Downloads/openjfx-14'
+    modules = ['javafx.controls' , 'javafx.fxml']
+}
+
+
+
+mainClassName = "sons.mamoun.Main"
+
+dependencies {
+
+    implementation 'com.google.code.gson:gson:2.8.6'
+}
+
+
+jlink {
+
+    addOptions('--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages' )
+ 
+
+launcher {  name = "start"}
+
+jpackage
+{
+outputDir = file("$projectDir/package")
+imageOutputDir= file("$projectDir/packageImage")
+imageName = "jumbdog"
+installerType="deb"
+installerOutputDir= file("$projectDir/installer")
+installerName="install-Jumbdog"
+}
+
+
+}
